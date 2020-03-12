@@ -13,15 +13,12 @@ import (
 func main() {
 	var err error
 	srv := micro.NewService(
-		micro.Name("service.order"),
+		micro.Name("srv.cli"),
 	)
-
-	srv.Init()
-
 	ctx := context.Background()
 
-	orderClient := pbOrder.NewOrderService("service.order", srv.Client())
-	paymentClient := pbPayment.NewPaymentService("service.payment", srv.Client())
+	orderClient := pbOrder.NewOrderService("srv.grpc.order", srv.Client())
+	paymentClient := pbPayment.NewPaymentService("srv.grpc.payment", srv.Client())
 
 	order := &pbOrder.Order{
 		Id:        "111",
